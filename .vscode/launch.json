@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Main",
+            "request": "launch",
+            "mainClass": "jordan.szalontai.mestint.tictactoe.Main",
+            "projectName": "mestint.tictactoe"
+        }
+    ]
+}
