@@ -1,5 +1,4 @@
 # Tic-Tac-Toe
-=======
 
 Háromszemélyes 4x4-es tic-tac-toe játék állapottér-reprezentációja Java nyelven implementálva.
 

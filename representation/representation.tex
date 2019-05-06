@@ -1,0 +1,98 @@
+\documentclass[fleqn]{article}
+\usepackage[a4paper,bindingoffset=0.2in,%
+            left=1in,right=1in,top=1in,bottom=1in,%
+            footskip=.25in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\begin{document}
+
+\title{Tic-Tac-Toe}
+\author{Szalontai Jordán}
+
+\maketitle
+
+\begin{abstract}
+Háromszemélyes 4x4-es tic-tac-toe játék állapottér-reprezentációja
+\end{abstract}
+
+\section{Játékállások reprezentációja}
+Legyen $J = \{1, 2, 3\}$ a játékosok szimbólumai, továbbá $H = J \cup \{ 0 \}$ és definiáljuk az\\$S: H^{4x4} \rightarrow \{H^{3x3},H^{3x3},H^{3x3},H^{3x3}\}$ függvény a következő képpen:
+\\\\
+$S\Bigg(\begin{bmatrix}
+	h_{11} & h_{12} & h_{13} & h_{14} \\
+	h_{21} & h_{22} & h_{23} & h_{24} \\
+	h_{31} & h_{32} & h_{33} & h_{34} \\
+	h_{41} & h_{42} & h_{43} & h_{44}
+\end{bmatrix}\Bigg)$ = 
+\Bigg\{$\begin{bmatrix}
+	h_{11} & h_{12} & h_{13}\\
+	h_{21} & h_{22} & h_{23}\\
+	h_{31} & h_{32} & h_{33}\\
+\end{bmatrix}$,
+$\begin{bmatrix}
+	h_{12} & h_{13} & h_{14} \\
+	h_{22} & h_{23} & h_{24} \\
+	h_{32} & h_{33} & h_{34} \\
+\end{bmatrix}$,
+$\begin{bmatrix}
+	h_{21} & h_{22} & h_{23} \\
+	h_{31} & h_{32} & h_{33} \\
+	h_{41} & h_{42} & h_{43}
+\end{bmatrix}$,
+$\begin{bmatrix}
+	h_{22} & h_{23} & h_{24} \\
+	h_{32} & h_{33} & h_{34} \\
+	h_{42} & h_{43} & h_{44}
+\end{bmatrix}$\Bigg\}.
+\\\\
+\\
+A játékállások reprezentációja egy $\langle\mathcal{A},  a_0, \mathcal{V}, \mathcal{L}\rangle$ négyes, ahol\\\\
+$\mathcal{A} = H^{4x4}$, \\\\
+$a_0 = \begin{bmatrix} 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \\0 & 0 & 0 & 0 \\0 & 0 & 0 & 0 \end{bmatrix} \in \mathcal{A}$, \\\\
+$\mathcal{L} = \{ l_{ijk} \mid i = 1, ..., 4 \wedge j = 1, ..., 4 \wedge k \in J \}$, \\\\
+$\mathcal{V} = \{ v \in \mathcal{A} \mid \exists{s}(s \in S(v) \wedge (ROW(s) \vee COL(s) \vee DIAG(s))) \vee DRAW(v) \}$\\\\
+rendre a játékállások halmaza, a kezdőállás, a lépések halmaza, valamint a végállások halmaza.
+\\\\
+A $ROW(s)$, $COL(s)$, $DIAG(s)$ formulák rendre megadják, hogy az adott $s \in H^{3x3}$ mátrixban egy sorban, egy oszlopban vagy valamelyik átlóban ugyanolyan nemnulla értékek szerepelnek-e, valamint a $DRAW(v)$ függvény megadja, az adott $v \in \mathcal{A}$ állás döntetlen-e. Ezek definíciói:\\\\
+$ROW(s) \rightleftharpoons \forall{i}(s_{i1} \neq 0 \wedge s_{i1} = s_{i2} \wedge s_{i2} = s_{i3})$,\\
+$COL(s) \rightleftharpoons \forall{j}(s_{1j} \neq 0 \wedge s_{1j} = s_{2j} \wedge s_{2j} = s_{3j}) \hfill  i = 1, ..., 3 \wedge j = 1, ..., 3$,\\
+$DIAG(s) \rightleftharpoons s_{22} \neq 0 \wedge ((s_{11} = s_{22} \wedge s_{22} = s_{33}) \vee (s_{13} = s_{22} \wedge s_{31} = s_{33})) $\\
+$DRAW(v) = \forall{x}(\forall{y}(v_{xy} \neq 0)) \hfill x = 1, ..., 4 \wedge y = 1, ..., 4$\\
+\\
+Továbbá $l_{ijk} \in \mathcal{L}$ esetén $dom(l_{ijk}) = \{ a \in \mathcal{A} \mid a_{ij} = 0\}$ és\\\\
+$l_{ijk}\Bigg(\begin{bmatrix}
+	a_{11} & a_{12} & a_{13} & a_{14} \\
+	a_{21} & a_{22} & a_{23} & a_{24} \\
+	a_{31} & a_{32} & a_{33} & a_{34} \\
+	a_{41} & a_{42} & a_{43} & a_{44}
+\end{bmatrix}\Bigg) = \begin{bmatrix}
+	b_{11} & b_{12} & b_{13} & b_{14} \\
+	b_{21} & b_{22} & b_{23} & b_{24} \\
+	b_{31} & b_{32} & b_{33} & b_{34} \\
+	b_{41} & b_{42} & b_{43} & b_{44}
+\end{bmatrix},$\\\\\\
+ahol
+$
+    b_{pq}=
+\begin{cases}
+    k,& \text{ha } p = i \wedge q = j \\
+    a_{pq},              & \text{egyébként}
+\end{cases}
+\hfill  p = 1, ..., 4 \wedge q = 1, ..., 4\\
+$
+
+
+\section{Állapottér-reprezentáció}
+
+A játék állapottér-reprezentációja egy $\langle\mathcal{A'},  a'_0, \mathcal{V'}, \mathcal{O}\rangle$ négyes, ahol\\\\
+$\mathcal{A'} = \mathcal{A} x J$,\\\\
+$a'_{0} = (a_{0}, 1)$,\\\\
+$\mathcal{V'} = \{ (a, r) \in \mathcal{A'} \mid a \in \mathcal{V} \},$\\\\
+$\mathcal{O} = \{ o_{ij} \mid i = 1, ..., 4 \wedge j = 1, ..., 4 \},$\\\\
+továbbá $o_{ij} \in \mathcal{O}$, $a' \in \mathcal{A'}$ és $k \in J$ esetén $dom(o_{ij}) = \{ (a, r) \in \mathcal{A'} \mid a \in dom(l_{ijr})\}$ és\\ $o_{ij}((a', k)) = (l_{ijk}(a), NEXT(k))$.
+\\\\
+A $NEXT: J \rightarrow J$ függvény megadja a soron következő játékos szimbólumát.
+
+
+\end{document}
