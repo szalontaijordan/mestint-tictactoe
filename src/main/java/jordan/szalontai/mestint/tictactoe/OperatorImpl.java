@@ -7,11 +7,22 @@ import jordan.szalontai.representation.Operator;
 import jordan.szalontai.representation.State;
 import jordan.szalontai.representation.Step;
 
+/**
+ * Class implementing the {@code Operator} interface.
+ * 
+ * @author Szalontai Jordán
+ */
 public class OperatorImpl implements Operator {
 
     private int i;
     private int j;
 
+    /**
+     * Constructs an operator instance with the given row and column indexes.
+     * 
+     * @param i row index
+     * @param j column index
+     */
     public OperatorImpl(int i, int j) {
         this.i = i;
         this.j = j;
@@ -61,10 +72,34 @@ public class OperatorImpl implements Operator {
         return null;
     }
 
+    /**
+     * Returns the number corresponding to the next player.
+     * 
+     * <pre>
+     * 1 -> 2
+     * 2 -> 3
+     * 3 -> 1
+     * </pre>
+     * 
+     * @param state the current state
+     * @return the number corresponding to the next player
+     */
     public static int getNextPlayer(State state) {
         return state.getPlayer() == 3 ? 1 : state.getPlayer() + 1;
     }
 
+    /**
+     * Returns the number corresponding to the previous player.
+     * 
+     * <pre>
+     * 3 -> 2
+     * 2 -> 1
+     * 1 -> 3
+     * </pre>
+     * 
+     * @param state the current state
+     * @return the number corresponding to the previous player
+     */
     public static int getPrevPlayer(State state) {
         return state.getPlayer() == 1 ? 3 : state.getPlayer() - 1;
     }

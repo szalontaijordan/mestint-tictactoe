@@ -6,6 +6,11 @@ import java.util.List;
 import jordan.szalontai.representation.Operator;
 import jordan.szalontai.representation.Step;
 
+/**
+ * Singleton class containing the list of all possible steps and operators.
+ * 
+ * @author Szalontai Jordán
+ */
 public class Interaction {
 
     private static Interaction interaction;
@@ -28,6 +33,11 @@ public class Interaction {
         }
     }
 
+    /**
+     * Returns the singleton instance of this class.
+     * 
+     * @return the singleton instance of this class
+     */
     public static Interaction getInstance() {
         if (interaction == null) {
             interaction = new Interaction();
