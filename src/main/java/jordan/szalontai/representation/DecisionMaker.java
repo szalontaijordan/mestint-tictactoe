@@ -2,10 +2,19 @@ package jordan.szalontai.representation;
 
 import java.util.List;
 
+/**
+ * Class implementing decision maker interfaces.
+ */
 public class DecisionMaker implements MaxN {
 
     private final int numberOfPlayers;
 
+    /**
+     * Construscts a decision maker, based on how many players are
+     * there in the game.
+     * 
+     * @param numberOfPlayers the number of players in the game
+     */
     public DecisionMaker(int numberOfPlayers) {
         this.numberOfPlayers = numberOfPlayers;
     }

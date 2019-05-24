@@ -1,10 +1,19 @@
 package jordan.szalontai.representation;
 
+/**
+ * Class for a record that is associated with the nodes of the game tree.
+ */
 public class Record {
 
     private Operator operator;
     private int[] goodness;
 
+    /**
+     * Contstructs a record for a node of the game tree.
+     * 
+     * @param operator the operator creating the node this record is associated with
+     * @param goodness an array containing goodness values for each player
+     */
     public Record(Operator operator, int[] goodness) {
         this.operator = operator;
         this.goodness = goodness;
